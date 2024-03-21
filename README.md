@@ -64,14 +64,27 @@ Foram feitos os processos de mudar o dtype de "OrderDate", criar um dataframe so
 # 🤖4. Aplicação do KMeans
 ## 4.1. Ajuste dos dados
 Nessa etapa foram feitos ajustes para criar um dataframe com base no RFV antes de aplicar a clusterização com KMeans. Aqui foram feitas operações de agregação e de merge, para criar o dataframe com Colunas de "_CustomerID", "Recência", "Frequência" e "Valor".
+
+### Distribuição da Recência
+![Rec](https://github.com/datalopes1/warehouse_rfv/blob/main/data/img/hist_1.png?raw=true)
+
+### Distribuição da Frequência
+![Feq](https://github.com/datalopes1/warehouse_rfv/blob/main/data/img/hist_2.png?raw=true)
+
+### Distribuição do Valor
+![Valor](https://github.com/datalopes1/warehouse_rfv/blob/main/data/img/hist_3.png?raw=true)
 ## 4.2. Pré-processamento dos dados e definição do número de clusters
-Aqui foi utilizado o StandardScaler() e definido o número de Clusters através do método do "cotovelo". O número de Clusters definido é 4. 
+### Plot do método do "cotovelo"
+![Elbow](https://github.com/datalopes1/warehouse_rfv/blob/main/data/img/elbow.png?raw=true)
+
+Aqui foi utilizado o StandardScaler() e definido o número de Clusters através do método do "cotovelo". O número de Clusters definido é 4.
 ## 4.3. Aplicando a clusterização através do KMeans
 Agora com os dados pré-processados e o número de Clusters definidos foi aplicado o algoritmo KMeans para segmentar os clientes. Fazendo uma classificação do comportamento dos Clusters através de seus Boxplots em: 
 - Possível Churn; 
 - Cliente Importante; 
 - Cliente com Potencial; 
-- Cliente Importante. 
+- Cliente Importante.
+
 Ao fim foi gerado um arquivo .csv com a segmentação dos clientes. 
 
 # ✅5. Conclusões
