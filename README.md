@@ -83,7 +83,7 @@ Agora com os dados pré-processados e o número de Clusters definidos foi aplica
 - Possível Churn; 
 - Cliente Importante; 
 - Cliente com Potencial; 
-- Cliente Importante.
+- Precisa de Atenção.
 
 Ao fim foi gerado um arquivo .csv com a segmentação dos clientes. 
 
