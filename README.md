@@ -1,29 +1,27 @@
-
-# 🏪Análise RFV (Recência Frequência Valor) - Retail Sales Data
+# 🏬 Análise RFV - Warehouse Sales Data
 
 Neste projeto será realizada uma análise do tipo RFV (Recência, Frequência e Valor) com dados que encontrei neste video no Youtube do canal [Jie Jenn](https://www.youtube.com/watch?v=9wxWrERZvss).
 
+![img](https://images.unsplash.com/photo-1624927637280-f033784c1279?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+
+### Objetivos e resultados
+O objetivo do projeto é através do algorítmo KMeans encontrar uma segmentação dos clientes para campanhas de marketing. Ao fim foi entregue uma arquivo .csv com os clientes segmentos em:
+
+- Potencialmente Leais;
+- Frequentes de Valor;
+- Retenção;
+- Regulares.
+
 ### 🛠️ Ferramentas utilizadas
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white)
+## Estrutura do Dataset
+Os dados são de uma rede varejista fictícia, as colunas estão organizadas dessa forma:
 
-## 1.1. Os dados, o problema e os objetivos
-
-A análise RFV é uma técnica de segmentação de clientes muito utilizada em marketing e gestão de relacionamento com clientes (CRM). Ele tem base em três métricas:
-
-- Recência (Recency): O tempo decorrido entre a última compra ou interação de um cliente com a empresa. Clientes mais recentes tem tendência de fazer mais compras do que clientes que não interagem a muito tempo.
-- Frequência (Frequency): É o número total de compras ou interações do cliente com a empresa. Clientes com maior frequência de compra, representam aqueles que são fiéis a empresa.
-- Valor monetário (Monetary value): Refere-se ao gasto total ou a média de gastos do cliente em suas compras na empresa. Clientes que tem maior média de valores gastos na empresa contribuem de maneira significante com os lucros dela.
-
-Combinando essas três métricas é possível de várias maneiras segmentar os clientes e partir disso criar campanhas de marketing, estratégias de relacionamento e campanhas focada em cada segmento de cliente especifico. 
-
-### Estrutura do dataset
-Os dados são de uma rede varejista fictícia que faz entregas internacionais de componentes. As colunas estão organizadas dessa forma:
-
-| Coluna | Descrição|
-|--------|----------|
-|**OrderNumber**| ID do pedido|
-|**Sales Channel**| Canal de vendas do pedido|
-|**WarehouseCode**| ID do armazém do pedido|
+|Coluna|Descrição|
+|-----|----------|
+|**OrderNumber**|ID do pedido|
+|**Sales Channel**|Canal de vendas do pedido|
+|**WarehouseCode**|ID do armazém do pedido|
 |**ProcuredDate**|Data de reserva do pedido|
 |**OrderDate**|Data da realizaçãod do pedido|
 |**ShipDate**|Data de envio|
@@ -38,60 +36,43 @@ Os dados são de uma rede varejista fictícia que faz entregas internacionais de
 |**Unit Price**|Preço unitário do produto|
 |**Unit Cost**|Custo unitário|
 
-### Objetivos
+## Bibliotecas Python utilizadas
+#### Manipulação de dados
+- Pandas, Numpy.
+#### EDA
+- Seaborn, Matplotlib.
+#### Clusterização
+- KMeans.
 
-Com este conjunto de dados em mãos meu objetivo será realizar a análise RFV, com uso do KMeans, e identificar uma segmentação de clientes para ser trabalhada pelo setor de marketing da empresa. 
+## Insights e conclusões
+### Sobre os segmentos
+Pensei nos segmentos da seguinte forma:
 
-## 1.2. Importação das bibliotecas e carregamento dos dados
-A bibliotecas utilizadas foram o pandas, numpy, datetime, os, matplotlib, seaborn e warnings.
+- Clientes potencialmente leais: podem estar explorando diferentes produtos dentro da empresa e têm potencial para se tornarem leais à nossa marca com o tempo. Ofertas personalizadas e outros meios de mantê-los engajados são importantes.
+- Frequentes de valor: são aqueles regulares que constantemente consomem nossos serviços. Com estes, precisamos usar estratégias de fidelização, como programas de recompensas e descontos por recorrência.
+- Clientes de retenção: possivelmente estão perdendo o interesse em nossa marca ou podem já ter encontrado outra opção. Para estes, precisamos buscar meios de reativação e incentivos para reacender a vontade de nos buscar.
+- Clientes regulares: são fiéis à nossa marca e retornam com certa regularidade. Buscar recomendações baseadas em suas últimas compras pode ser uma forma de estimular mais compras.
 
-# 🧱2. Entendendo os dados 
-##  2.1. Estrutura do dataframe
-Aqui busquei através do métodos shape, head(), tail(), e info() para entender a estrutura dos dados. 
-## 2.2. Breve conclusões antes de partir para os próximos passos 
+### Sugestões para o time marketing
+#### Para Clientes Potencialmente Leais
 
-- Vou usar somente algumas colunas, portando vou criar um novo dataframe somente com elas;
-- Será necessário criar uma coluna para contabilizar o total de receita por pedido;
-- Será necessário mudar a coluna "OrderDate" para o dtype datetime;
-- O dataframe não possui dados nulos.
+1. Campanhas de recomendações e descontos personalizados: Através de e-mail marketing, sugerir produtos relacionados ou que complementam as últimas compras, juntamente com cupons de desconto.
+2. Programa de exclusividade: Oferecer acesso exclusivo a novos produtos no catálogo com certa antecedência.
+#### Para Clientes Frequentes de Valor
 
-# 🧹3. Limpeza e manipulação dos dados
-## 3.1. Verificação de nulos e duplicados
-Verificação através dos métodos isna() e duplicated(). 
-## 3.2. Manipulação dos dados e colunas
-Foram feitos os processos de mudar o dtype de "OrderDate", criar um dataframe somente com as colunas que serão utilizadas, e a criação da coluna "Revenue".
+1. Programa de fidelidade: Oferecer recompensas a partir de metas de consumo, como descontos especiais e brindes que remetam à nossa marca, assim como eventos para clientes dentro do programa, como dias com ofertas diferenciadas.
+#### Para Clientes de Retenção
 
-# 🤖4. Aplicação do KMeans
-## 4.1. Ajuste dos dados
-Nessa etapa foram feitos ajustes para criar um dataframe com base no RFV antes de aplicar a clusterização com KMeans. Aqui foram feitas operações de agregação e de merge, para criar o dataframe com Colunas de "_CustomerID", "Recência", "Frequência" e "Valor".
+1. Campanhas de reativação: Envio de e-mails com descontos agressivos baseados nas últimas compras feitas ou oferecer descontos para as próximas compras.
+2. Pesquisas de satisfação: Envio de e-mails com pesquisa de satisfação, para entender os motivos da inatividade, com desconto especial ao final do formulário.
+#### Para Clientes Regulares
 
-### Distribuição da Recência
-![Rec](https://github.com/datalopes1/warehouse_rfv/blob/main/data/img/hist_1.png?raw=true)
+1. Promoções de recompensa por referência: Incentivar esses clientes a indicarem amigos ou familiares oferecendo recompensas especiais, como descontos ou brindes, para cada nova indicação bem-sucedida.
 
-### Distribuição da Frequência
-![Feq](https://github.com/datalopes1/warehouse_rfv/blob/main/data/img/hist_2.png?raw=true)
 
-### Distribuição do Valor
-![Valor](https://github.com/datalopes1/warehouse_rfv/blob/main/data/img/hist_3.png?raw=true)
-## 4.2. Pré-processamento dos dados e definição do número de clusters
-### Plot do método do "cotovelo"
-![Elbow](https://github.com/datalopes1/warehouse_rfv/blob/main/data/img/elbow.png?raw=true)
+![img](https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 
-Aqui foi utilizado o StandardScaler() e definido o número de Clusters através do método do "cotovelo". O número de Clusters definido é 4.
-## 4.3. Aplicando a clusterização através do KMeans
-Agora com os dados pré-processados e o número de Clusters definidos foi aplicado o algoritmo KMeans para segmentar os clientes. Fazendo uma classificação do comportamento dos Clusters através de seus Boxplots em: 
-- Possível Churn; 
-- Cliente Importante; 
-- Cliente com Potencial; 
-- Precisa de Atenção.
 
-Ao fim foi gerado um arquivo .csv com a segmentação dos clientes. 
+### Conclusões
 
-# ✅5. Conclusões
-![Warehouse](https://images.unsplash.com/photo-1590247813693-5541d1c609fd?q=80&w=2109&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
-Ao fim, conseguimos gerar um dataset com uma segmentação bastante útil para o time de marketing tornando possível criar dashboards e campanhas diretamente focadas a clientes como por exemplo:
-
-- Uma campanha focada em reverter a possível situação de Churn dos clientes nesta segmentação. Propaganda negativa é muito mais efetiva que a positiva, especialmente em tempos de redes sociais, garantir um bom pós-venda e relacionamento com clientes é muito importante em qualquer sertor;
-- Campanhas com descontos e outras formas de ativar os clientes com potencial, e fazer com que eles consumam mais produtos (é de entedimentos como este que você recebe aqueles e-mails de grandes lojas e varejistas online);
-- Clientes que precisam de atenção, entram na mesmo caso de clientes em possível Churn, campanhas que ativem estes clientes e façam eles se sentirem "lembrados".
-- Clientes importantes devem ter tratamento melhor, e acesso a desconto e métodos para aumentar sua fidelização junto a empresa. 
+Ao concluir este projeto, podemos ver como, no caso do setor de marketing, a Análise RFV pode ser ponto chave para campanhas bem-sucedidas e bons resultados. Uma segmentação bem realizada permite a criação de campanhas de marketing com um direcionamento personalizado para cada tipo de cliente, dando um pouco de "alma" para cada campanha. A análise pode ser direcionada para diversos outros setores com fins diferentes, mas sempre entregando como resultado uma segmentação que permite trabalhar de forma ajustada e com menos espaços para erros causados por generalismos.
