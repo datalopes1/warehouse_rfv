@@ -39,7 +39,7 @@ Os dados são de uma rede varejista fictícia, as colunas estão organizadas des
 ## Bibliotecas Python utilizadas
 #### Manipulação de dados
 - Pandas, Numpy.
-#### EDA
+#### Visualização
 - Seaborn, Matplotlib.
 #### Clusterização
 - KMeans.
